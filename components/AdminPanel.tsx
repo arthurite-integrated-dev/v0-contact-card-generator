@@ -70,11 +70,11 @@ export default function AdminPanel({ onContactAdded }: AdminPanelProps) {
 
   return (
     <Card className="border-0 shadow-lg">
-      <CardHeader className="bg-[#1a472a] text-white rounded-t-lg">
-        <CardTitle>Add New Staff Member</CardTitle>
+      <CardHeader className="bg-[#1a472a] text-white rounded-t-lg p-6">
+        <CardTitle className="text-xl">Add New Staff Member</CardTitle>
       </CardHeader>
-      <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <CardContent className="p-8">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Full Name *
