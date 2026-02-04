@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     if (!accessKey) {
       console.error('[v0] ACCESS_KEY not configured');
       return NextResponse.json(
-        { error: 'Server configuration error' },
+        { error: 'Server configuration error. ACCESS_KEY not configured' },
         { status: 500 }
       );
     }
