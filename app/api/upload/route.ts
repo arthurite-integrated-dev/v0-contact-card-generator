@@ -1,6 +1,13 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { NextRequest, NextResponse } from 'next/server';
 
+// Log environment variable status
+console.log('[v0] 🔍 S3 Upload Environment Check:');
+console.log(`[v0] REGION: ${process.env.REGION ? '✓' : '✗'}`);
+console.log(`[v0] ACCESS_KEY_ID: ${process.env.ACCESS_KEY_ID ? '✓' : '✗'}`);
+console.log(`[v0] SECRET_ACCESS_KEY: ${process.env.SECRET_ACCESS_KEY ? '✓' : '✗'}`);
+console.log(`[v0] S3_BUCKET_NAME: ${process.env.S3_BUCKET_NAME ? '✓' : '✗'}`);
+
 const s3Client = new S3Client({
   region: process.env.REGION || 'us-east-1',
   credentials: {

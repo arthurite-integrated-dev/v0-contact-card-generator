@@ -1,17 +1,20 @@
 version: 1
-env:
-  variables:
-    REGION: $REGION
-    ACCESS_KEY_ID: $ACCESS_KEY_ID
-    SECRET_ACCESS_KEY: $SECRET_ACCESS_KEY
-    DYNAMODB_TABLE_NAME: $DYNAMODB_TABLE_NAME
-    S3_BUCKET_NAME: $S3_BUCKET_NAME
-    ACCESS_KEY: $ACCESS_KEY
 frontend:
     phases:
         preBuild:
             commands:
                 - 'npm ci --legacy-peer-deps'
+                - |
+                  cat > .env.production << EOF
+                  REGION=${REGION}
+                  ACCESS_KEY_ID=${ACCESS_KEY_ID}
+                  SECRET_ACCESS_KEY=${SECRET_ACCESS_KEY}
+                  DYNAMODB_TABLE_NAME=${DYNAMODB_TABLE_NAME}
+                  S3_BUCKET_NAME=${S3_BUCKET_NAME}
+                  ACCESS_KEY=${ACCESS_KEY}
+                  EOF
+                - 'echo "✓ Environment file created"'
+                - 'cat .env.production | head -3'
         build:
             commands:
                 - 'npm run build'

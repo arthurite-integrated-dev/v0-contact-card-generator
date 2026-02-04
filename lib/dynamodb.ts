@@ -1,6 +1,16 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, PutCommand, GetCommand, ScanCommand, DeleteCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 
+// Log environment variable status
+if (typeof window === 'undefined') { // Only log on server
+  console.log('[v0] 🔍 Environment Variables Check:');
+  console.log(`[v0] REGION: ${process.env.REGION ? '✓' : '✗'}`);
+  console.log(`[v0] ACCESS_KEY_ID: ${process.env.ACCESS_KEY_ID ? '✓' : '✗'}`);
+  console.log(`[v0] SECRET_ACCESS_KEY: ${process.env.SECRET_ACCESS_KEY ? '✓' : '✗'}`);
+  console.log(`[v0] DYNAMODB_TABLE_NAME: ${process.env.DYNAMODB_TABLE_NAME ? '✓' : '✗'}`);
+  console.log(`[v0] S3_BUCKET_NAME: ${process.env.S3_BUCKET_NAME ? '✓' : '✗'}`);
+}
+
 const client = new DynamoDBClient({
   region: process.env.REGION || 'us-east-1',
   credentials: {
