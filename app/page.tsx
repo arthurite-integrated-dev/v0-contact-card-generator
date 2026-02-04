@@ -4,14 +4,25 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import AdminPanel from '@/components/AdminPanel';
 import ContactsList from '@/components/ContactsList';
-import { Contact, getContacts } from '@/lib/supabase';
+import AuthModal from '@/components/AuthModal';
+import { Contact, getContacts } from '@/lib/api';
 
 export default function Home() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   useEffect(() => {
+    // Check if already authenticated
+    const authenticated = localStorage.getItem('authenticated') === 'true';
+    setIsAuthenticated(authenticated);
+    setLoading(!authenticated);
+  }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     async function loadContacts() {
       try {
         const data = await getContacts();
@@ -24,7 +35,12 @@ export default function Home() {
     }
 
     loadContacts();
-  }, [refreshTrigger]);
+  }, [refreshTrigger, isAuthenticated]);
+
+  const handleAuthenticate = () => {
+    setIsAuthenticated(true);
+    setLoading(true);
+  };
 
   const handleContactAdded = () => {
     setRefreshTrigger(prev => prev + 1);
@@ -33,6 +49,10 @@ export default function Home() {
   const handleContactDeleted = () => {
     setRefreshTrigger(prev => prev + 1);
   };
+
+  if (!isAuthenticated) {
+    return <AuthModal onAuthenticate={handleAuthenticate} />;
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">

@@ -10,7 +10,7 @@ export default function Header({ logo }: HeaderProps) {
       <div className="flex items-center justify-center gap-4 mb-4">
         <div className="w-20 h-20 rounded-full overflow-hidden shadow-lg">
           <Image
-            src={logo || "/placeholder.svg"}
+            src="/atr-logo.png"
             alt="Arthurite Integrated Logo"
             width={80}
             height={80}

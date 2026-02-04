@@ -1,6 +1,6 @@
 'use client';
 
-import { Contact, deleteContact } from '@/lib/supabase';
+import { Contact, deleteContact } from '@/lib/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
@@ -45,7 +45,7 @@ export default function ContactsList({ contacts, loading, onContactDeleted }: Co
 
   return (
     <Card className="border-0 shadow-lg">
-      <CardHeader className="bg-[#1a472a] text-white rounded-t-lg">
+      <CardHeader className="bg-[#1a472a] text-white rounded-t-lg p-6 text-xl">
         <CardTitle>Staff Contacts ({contacts.length})</CardTitle>
       </CardHeader>
       <CardContent className="p-6">

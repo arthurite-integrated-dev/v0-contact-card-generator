@@ -5,6 +5,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: ['atr-staff-id.s3.amazonaws.com'],
   },
  
 }

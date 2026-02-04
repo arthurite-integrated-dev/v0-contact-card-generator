@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { getContactBySlug, Contact } from '@/lib/supabase';
+import { getContactBySlug, Contact } from '@/lib/api';
 import ContactCard from '@/components/ContactCard';
 
 export default function CardPage() {
